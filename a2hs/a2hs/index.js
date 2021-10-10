@@ -15,7 +15,7 @@ setInterval(() => {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-      .register('/zxc-steve.github.io/a2hs/a2hs/sw.js')
+      .register('/a2hs/a2hs/sw.js')
     .then(() => { console.log('Service Worker Registered'); });
 }
 
