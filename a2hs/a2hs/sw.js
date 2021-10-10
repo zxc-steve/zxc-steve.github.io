@@ -1,14 +1,14 @@
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open('fox-store').then((cache) => cache.addAll([
-      '/zxc-steve.github.io/a2hs/a2hs/',
-      '/zxc-steve.github.io/a2hs/a2hs/index.html',
-      '/zxc-steve.github.io/a2hs/a2hs/index.js',
-      '/zxc-steve.github.io/a2hs/a2hs/style.css',
-      '/zxc-steve.github.io/a2hs/a2hs/images/fox1.jpg',
-      '/zxc-steve.github.io/a2hs/a2hs/images/fox2.jpg',
-      '/zxc-steve.github.io/a2hs/a2hs/images/fox3.jpg',
-      '/zxc-steve.github.io/a2hs/a2hs/images/fox4.jpg',
+      '/a2hs/a2hs/',
+      '/a2hs/a2hs/index.html',
+      '/a2hs/a2hs/index.js',
+      '/a2hs/a2hs/style.css',
+      '/a2hs/a2hs/images/fox1.jpg',
+      '/a2hs/a2hs/images/fox2.jpg',
+      '/a2hs/a2hs/images/fox3.jpg',
+      '/a2hs/a2hs/images/fox4.jpg',
     ])),
   );
 });
