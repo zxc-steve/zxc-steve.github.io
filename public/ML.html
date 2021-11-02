@@ -1,0 +1,70 @@
+﻿<!doctype html>
+
+<head>
+    <title>TensorFlow.js: Using a pretrained MobileNet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./stylesheets/tfjs-examples.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+</head>
+
+<style>
+    .pred-container {
+        margin-bottom: 20px;
+    }
+
+        .pred-container > div {
+            display: inline-block;
+            margin-right: 20px;
+            vertical-align: top;
+        }
+
+    .row {
+        display: table-row;
+    }
+
+    .cell {
+        display: table-cell;
+        padding-right: 20px;
+    }
+
+    #file-container {
+        margin-bottom: 20px;
+    }
+</style>
+
+<body>
+    <div class="tfjs-example-container">
+        <section class='title-area'>
+            <h1>TensorFlow.js: Using a pretrained MobileNet</h1>
+        </section>
+
+        <section>
+            <p class='section-head'>Description</p>
+            <p>
+                This demo uses the pretrained MobileNet_25_224 model from Keras,
+                <a href="https://github.com/fchollet/deep-learning-models/releases/download/v0.6/mobilenet_2_5_224_tf.h5">here</a>.
+            </p>
+        </section>
+
+        <section>
+            <p class='section-head'>Status</p>
+            <div id="status"></div>
+        </section>
+
+        <section>
+            <p class='section-head'>Model Output</p>
+
+            <div id="file-container" style="display: none">
+                Upload an image: <input type="file" id="files" name="files[]" multiple />
+            </div>
+
+            <div id="predictions"></div>
+
+            <img style="" id="cat" src="sunflower.jpg" width=224 height=224 />
+        </section>
+
+
+        <script type="module" src="ML.js"></script>
+    </div>
+</body>

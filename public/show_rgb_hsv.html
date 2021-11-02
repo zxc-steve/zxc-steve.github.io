@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img src="./IMG_0507.jpg" width="300"/>
+
+    <input type='file' name='img' size='65' id='uploadimage' value="./IMG_0507.jpg" />
+    <canvas id="canvas">
+    </canvas>
+
+    <div id="hovered-color"></div>
+    <div id="selected-color"></div>
+    <script>
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        //img.src = './IMG_0507.jpg'; // only work with http server
+        //img.src = window.URL.createObjectURL('./IMG_0507.jpg');   // fail
+        //let file = File.createFromFileName('./IMG_0507.jpg');
+        //img.src = window.URL.createObjectURL(file)  // fail: not function
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        //window.setTimeout(ctx.drawImage, 2000, document.querySelector("img"), 0, 0);
+        //ctx.drawImage(document.querySelector("img"), 0, 0); // partial work.
+        // image display OK ,but fail to get pixel data, CORS tainted canvas
+
+        var hoveredColor = document.getElementById('hovered-color');
+        var selectedColor = document.getElementById('selected-color');
+
+        canvas.addEventListener('mousemove', function (event) {
+            pick(event, hoveredColor);
+        });
+        canvas.addEventListener('click', function (event) {
+            pick(event, selectedColor);
+            rgb_array = [], hsv_array = [];
+        });
+        img.onload = function () {
+            canvas.width = img.width / 2; canvas.height = img.height / 2
+            ctx.drawImage(img, 0, 0,img.width/2,img.height/2);
+            img.style.display = 'none';
+        };
+        document.getElementById("uploadimage").addEventListener("change", draw_canvas, false)
+        function draw_canvas(e) {
+            console.log(e, "file selected and begin draw canvas")
+            let f = document.getElementById("uploadimage").files[0];
+            let url = window.URL || window.webkitURL;
+            let src = url.createObjectURL(f);
+            img.src = src;
+        }
+
+        let rgb_array = [], hsv_array = [];
+        function get_col(m, c) {return m.map(x => x[c]);}
+        function find_maxmin(arr) {
+            return [
+                Math.min(...get_col(arr, 0)), Math.max(...get_col(arr, 0)),
+                Math.min(...get_col(arr, 1)), Math.max(...get_col(arr, 1)),
+                Math.min(...get_col(arr, 2)), Math.max(...get_col(arr, 2))]
+        }
+        function pick(event, destination) {
+            let x = event.layerX;
+            let y = event.layerY;
+            let pixel = ctx.getImageData(x, y, 1, 1);
+            let data = pixel.data;
+            rgb_array.push([data[0], data[1], data[2]]);
+            hsv_array.push(r2h(data))
+            const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+            destination.style.borderColor = rgba;
+            destination.textContent = "rgb: "+rgba + "hsv: "+
+                JSON.stringify(r2h(data)) + " : min max "+
+                JSON.stringify(find_maxmin(rgb_array))+ " : "+
+                JSON.stringify(find_maxmin(hsv_array))   ;
+        }
+        function r2h(data) { return rgb2hsv(data[0], data[1], data[2]);}
+        function rgb2hsv(r, g, b) {
+            let rabs, gabs, babs, rr, gg, bb, h, s, v, diff, diffc, percentRoundFn;
+            rabs = r / 255;
+            gabs = g / 255;
+            babs = b / 255;
+            v = Math.max(rabs, gabs, babs),
+                diff = v - Math.min(rabs, gabs, babs);
+            diffc = c => (v - c) / 6 / diff + 1 / 2;
+            percentRoundFn = num => Math.round(num * 100) / 100;
+            if (diff == 0) {
+                h = s = 0;
+            } else {
+                s = diff / v;
+                rr = diffc(rabs);
+                gg = diffc(gabs);
+                bb = diffc(babs);
+
+                if (rabs === v) {
+                    h = bb - gg;
+                } else if (gabs === v) {
+                    h = (1 / 3) + rr - bb;
+                } else if (babs === v) {
+                    h = (2 / 3) + gg - rr;
+                }
+                if (h < 0) {
+                    h += 1;
+                } else if (h > 1) {
+                    h -= 1;
+                }
+            }
+            return [
+                Math.round(h * 179),
+                Math.round(percentRoundFn(s * 255)),
+                Math.round(percentRoundFn(v * 255))]; // for opencv compatibility
+            /*return {
+                h: Math.round(h * 360),
+                s: percentRoundFn(s * 100),
+                v: percentRoundFn(v * 100)
+            };*/
+        }
+    </script>
+</body>
+
+<style type="text/css">
+    div#hovered-color {
+        border-style: solid;
+        border-width: 5px;
+    }
+    div#selected-color {
+        border-style: solid;
+        border-width: 5px;
+    }
+    img{display:none;}
+</style>
+
+
+</html>

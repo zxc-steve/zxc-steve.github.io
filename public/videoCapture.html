@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/videoCapture.css">
+</head>
+<body>
+    <video src="Billard/IMG_0529.MOV" style="display: none"></video>
+    <input type="file" accept="video/*" /><button id="play_button">Play again</button>
+    <div id="div_c">
+        <canvas id="canvas_video"></canvas>
+        <canvas id="canvas_debug1"></canvas>
+        <canvas id="canvas_debug2"></canvas>
+        <canvas id="canvas_debug3"></canvas>
+    </div>
+    <p id="progress"></p><p id="frameTime"></p>
+    <script src="point.js"></script>
+    <script src="videoCapture_lib.js"></script>
+    <script src="videoCapture.js"></script>
+    <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+
+</body>
+    </html>
