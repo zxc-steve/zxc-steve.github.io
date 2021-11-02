@@ -11,7 +11,7 @@ async function func1() {
         //mode: 'no-cors' // 'cors' by default, this will cause problem in google sheet API
     })
     //info.innerText = await res.text();
-    info.innerText = JSON.stringify(await res.json());
+    info.innerText = JSON.stringify(await res.json(), null, 2);
     let cnt = 30;
     while (cnt > 0) {
         info1.innerText = `Will download google sheet in ${cnt-1} seconds`;
