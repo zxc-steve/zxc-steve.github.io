@@ -2,7 +2,7 @@ let info = document.getElementById("info");
 let info1 = document.getElementById("info1");
 //let excelUrl = "https://script.google.com/macros/s/AKfycbzwmiwbMABAQsHYuAEmx8X0zmgN2TYypRbE26PYnkXQPaitvYzVEKfVcdq6PGH0EVz8/exec"
 let downloadUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSJidRMnkOchGogOHvjn-fd4Yi29bWMvApUVENO4fmrx889Pzo6nMkcxltBccKGg46b_Bad4U_aRCa8/pub?output=xlsx"
-let excelUrl = "https://script.google.com/macros/s/AKfycbySiwbSdwmrFrrsX-iwnANGP2b6at-IwTUO2fgTRg7z6YoT_XJc7G2lzZCVIHzODkHs/exec"
+let excelUrl = "https://script.google.com/macros/s/AKfycbyrbAdSZqKuAkI6InQwZhhsFEmpaofqtNKiEUho1r7ST3hOMLL2cqyJ6Yi_HYfZ90Jp/exec"
 
 func1();
 async function func1() {
