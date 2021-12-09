@@ -17,7 +17,7 @@ async function func1() {
     info.innerText = JSON.stringify(await res.json(), null, 2);
     let cnt = 30;
     while (cnt > 0) {
-        info1.innerText = `Will download google sheet in ${cnt-1} seconds`;
+        info1.innerText = `yy Will download google sheet in ${cnt-1} seconds`;
         await sleep(1000);
         cnt--;
     }
