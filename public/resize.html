@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p {
+            border: 2px solid;
+            padding: 20px;
+            width: 300px;
+            resize: both;
+            overflow: auto;
+        }
+        #right_panel {
+            border: 2px solid;
+            height: 200px;
+            width: 26px;
+            padding-left: 4px;
+            
+            right: 0;
+            background-color: #f0f0ff;
+        }
+
+            #right_panel::after {
+                content: '';
+                background-color: #ccc;
+           
+                left: 0;
+                width: 4px;
+                height: 100%;
+                cursor: ew-resize;
+            }
+    </style>
+
+</head>
+<body>
+    <div id="right_panel"></div>
+    <h1>The resize Property</h1>
+
+    <div>
+        <p>Let the user resize only the height of this div element.</p>
+        <p>To resize: Click and drag the bottom right corner of this div element.</p>
+    </div>
+
+
+    <script>
+        /* https://stackoverflow.com/questions/26233180/resize-a-div-on-border-drag-and-drop-without-adding-extra-markup
+         * or simple one as:
+         * https://stackoverflow.com/questions/65456941/how-to-make-an-entire-side-of-a-div-resizable
+        */
+        const BORDER_SIZE = 4;
+        const panel = document.getElementById("right_panel");
+
+        let m_pos;
+        function resize(e) {
+            const dx = m_pos - e.x;
+            m_pos = e.x;
+            panel.style.width = (parseInt(getComputedStyle(panel, '').width) + dx) + "px";
+        }
+
+        panel.addEventListener("mousedown", function (e) {
+            if (e.offsetX < BORDER_SIZE) {
+                m_pos = e.x;
+                document.addEventListener("mousemove", resize, false);
+            }
+        }, false);
+
+        document.addEventListener("mouseup", function () {
+            document.removeEventListener("mousemove", resize, false);
+        }, false);
+    </script>
+</body>
+
+</html>

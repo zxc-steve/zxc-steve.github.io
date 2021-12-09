@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public"
+    "\\public",
+    "\\public\\javascripts"
   ],
-  "SelectedNode": "\\public",
+  "SelectedNode": "\\public\\resize.html",
   "PreviewInSolutionExplorer": false
 }
