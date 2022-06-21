@@ -80,11 +80,60 @@ t2.fromHtmlTable(a2);
 t3.fromHtmlTable(a3);
 t4 = new myTable;
 t4.fromObject(t3.toObject())
-url = "https://script.google.com/macros/s/AKfycbz4kvSzlBfJIah-OJUdfR5cDuxRrnmIo-vDCLa1Jm-GLR1XbQ4von9k8ADmsJjW9UXg/exec?cmd=post&sheetname=Sheet6"
+posturl = "https://script.google.com/macros/s/AKfycbz4kvSzlBfJIah-OJUdfR5cDuxRrnmIo-vDCLa1Jm-GLR1XbQ4von9k8ADmsJjW9UXg/exec?cmd=post&sheetname=Sheet6"
+geturl  = "https://script.google.com/macros/s/AKfycbz4kvSzlBfJIah-OJUdfR5cDuxRrnmIo-vDCLa1Jm-GLR1XbQ4von9k8ADmsJjW9UXg/exec?cmd=get&sheetname=Sheet6"
+ // simple HTTP get
+a=await fetch(geturl);
+b=await a.json();
+console.log(b.json);
+console.log('-'.repeat(30));
+// Post with table json
+a = await fetch(posturl,
+    {
+        method: 'POST',
+        body: JSON.stringify(t3.toObject())
+    });
+b = await a.json();
+console.log(b);
+
+/*
 fetch(url, {
-    method: 'POST', // or 'PUT'
+    method: 'POST', //*GET, POST, PUT, DELETE, etc.
+    mode: 'no-cors', // no-cors, *cors, same-origin
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+    .then(response => response.json())
+    .then(data => console.log(data));
+    */
+/*
+fetch(url, {
+    method: 'POST', //*GET, POST, PUT, DELETE, etc.
+    mode: 'no-cors', // no-cors, *cors, same-origin
+    headers: {
+        'Content-Type': 'text/plain',
+    },
+    body: JSON.stringify(t3.toObject()),
+})
+    .then(response => response.text())
+    .then(data => console.log(data));
+*/
+/*
+fetch(url, {
+    method: 'POST', //*GET, POST, PUT, DELETE, etc.
+    mode: 'no-cors', // no-cors, *cors, same-origin
     headers: {
         'Content-Type': 'application/json',
     },
     body: JSON.stringify(t3.toObject()),
 })
+    .then(response => response.json())
+    .then(data => console.log(data));
+*/
+/* // simple HTTP get
+  a=await fetch(url);
+  b=await a.json();
+  console.log(b.json);
+ * */
+
