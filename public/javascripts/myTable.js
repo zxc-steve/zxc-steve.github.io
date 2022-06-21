@@ -84,7 +84,7 @@ url = "https://script.google.com/macros/s/AKfycbz4kvSzlBfJIah-OJUdfR5cDuxRrnmIo-
 fetch(url, {
     method: 'POST', // or 'PUT'
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain',
     },
     body: JSON.stringify(t3.toObject()),
 })
