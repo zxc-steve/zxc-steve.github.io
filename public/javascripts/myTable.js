@@ -1,3 +1,4 @@
+// test ¤¤¤å
 class myTable {
     fromUrl(url) {
         let json_string = UrlFetchApp.fetch(url).getContentText();
@@ -61,7 +62,7 @@ class myTable {
         })
         parent.appendChild(table);
     }
-    merge(t) { //merge table t into this
+    append(t) { //merge table t into this
         for (let i of t.head) if (!this.head.includes(i)) this.head.push(i);
         let d = [...this.toObject(), ...t.toObject()];
         this.data = d.map(e => this.head.map(f => e[f]));
@@ -80,8 +81,10 @@ t2.fromHtmlTable(a2);
 t3.fromHtmlTable(a3);
 t4 = new myTable;
 t4.fromObject(t3.toObject())
-posturl = "https://script.google.com/macros/s/AKfycbz4kvSzlBfJIah-OJUdfR5cDuxRrnmIo-vDCLa1Jm-GLR1XbQ4von9k8ADmsJjW9UXg/exec?cmd=post&sheetname=Sheet6"
-geturl = "https://script.google.com/macros/s/AKfycbz4kvSzlBfJIah-OJUdfR5cDuxRrnmIo-vDCLa1Jm-GLR1XbQ4von9k8ADmsJjW9UXg/exec?cmd=get&sheetname=Sheet6"
+url = "https://script.google.com/macros/s/AKfycbzmYr2V_b7HX6efdfbPchupaHCuH0CzVD2l93zu3ujzHesOErbpHSZoaaJ-wGF6lJ_s/exec";
+posturl = url+"?cmd=post&sheetname=Sheet6"
+geturl = url + "?cmd=get&sheetname=Sheet6"
+appendurl = url + "?cmd=append&sheetname=Sheet6"
 
 getGoogleSheet = async() => {
 
@@ -95,6 +98,15 @@ getGoogleSheet = async() => {
         {
             method: 'POST',
             body: JSON.stringify(t3.toObject())
+        });
+    b = await a.json();
+    console.log(b);
+    console.log('-'.repeat(30));
+    // Post with table json
+    a = await fetch(appendurl,
+        {
+            method: 'POST',
+            body: JSON.stringify(t2.toObject())
         });
     b = await a.json();
     console.log(b);
