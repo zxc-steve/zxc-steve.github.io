@@ -1,10 +1,7 @@
-// test ¤¤¤å
 class myTable {
     fromUrl(url) {
         let json_string = UrlFetchApp.fetch(url).getContentText();
         let json = JSON.parse(json_string);
-        //this.head = Object.keys(json[0]);
-        //this.data = json.map(e => this.head.map(f => e[f]));
         return this.fromObject(json);
     }
     fromSheet(sheet_name = 'Sheet1') {
@@ -19,6 +16,8 @@ class myTable {
         let ary = [...t.rows].map(r => [...r.querySelectorAll('td,th')].map(c => c.innerText));
         this.head = ary[0];
         this.data = ary.slice(1);
+        let findDuplicates = arr => arr.filter((item, index) => { if (arr.indexOf(item) != index) arr[index] += index; })
+        findDuplicates(this.head);
         return this;
     }
     fromObject(json) {
@@ -70,86 +69,6 @@ class myTable {
     }
 
 }
-a0 = document.querySelector('#table0');
-a1 = document.querySelector('#table1');
-a2 = document.querySelector('#table2');
-a3 = document.querySelector('#table3');
-t0 = new myTable; t1 = new myTable; t2 = new myTable; t3 = new myTable;
-t0.fromHtmlTable(a0);
-t1.fromHtmlTable(a1);
-t2.fromHtmlTable(a2);
-t3.fromHtmlTable(a3);
-t4 = new myTable;
-t4.fromObject(t3.toObject())
-url = "https://script.google.com/macros/s/AKfycbzmYr2V_b7HX6efdfbPchupaHCuH0CzVD2l93zu3ujzHesOErbpHSZoaaJ-wGF6lJ_s/exec";
-posturl = url+"?cmd=post&sheetname=Sheet6"
-geturl = url + "?cmd=get&sheetname=Sheet6"
-appendurl = url + "?cmd=append&sheetname=Sheet6"
 
-getGoogleSheet = async() => {
 
-    // simple HTTP get
-    a=await fetch(geturl);
-    b=await a.json();
-    console.log(b.json);
-    console.log('-'.repeat(30));
-    // Post with table json
-    a = await fetch(posturl,
-        {
-            method: 'POST',
-            body: JSON.stringify(t3.toObject())
-        });
-    b = await a.json();
-    console.log(b);
-    console.log('-'.repeat(30));
-    // Post with table json
-    a = await fetch(appendurl,
-        {
-            method: 'POST',
-            body: JSON.stringify(t2.toObject())
-        });
-    b = await a.json();
-    console.log(b);
-};
-getGoogleSheet();
-/* All the fetch fail ! CANNOT set headers !
-fetch(url, {
-    method: 'POST', //*GET, POST, PUT, DELETE, etc.
-    mode: 'no-cors', // no-cors, *cors, same-origin
-    headers: {
-        'Content-Type': 'application/json',
-    },
-})
-    .then(response => response.json())
-    .then(data => console.log(data));
-    */
-/*
-fetch(url, {
-    method: 'POST', //*GET, POST, PUT, DELETE, etc.
-    mode: 'no-cors', // no-cors, *cors, same-origin
-    headers: {
-        'Content-Type': 'text/plain',
-    },
-    body: JSON.stringify(t3.toObject()),
-})
-    .then(response => response.text())
-    .then(data => console.log(data));
-*/
-/*
-fetch(url, {
-    method: 'POST', //*GET, POST, PUT, DELETE, etc.
-    mode: 'no-cors', // no-cors, *cors, same-origin
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(t3.toObject()),
-})
-    .then(response => response.json())
-    .then(data => console.log(data));
-*/
-/* // simple HTTP get
-  a=await fetch(url);
-  b=await a.json();
-  console.log(b.json);
- * */
 

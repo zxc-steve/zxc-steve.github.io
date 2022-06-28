@@ -57,10 +57,11 @@ d0 = [...t0][1].querySelectorAll('td,th')
 d1 = [...t0][2].querySelectorAll('td,th')
 d2 = [...t0][3].querySelectorAll('td,th')
 d3 = [...t0][4].querySelectorAll('td,th')
-*/
+
 t = new convertSpanTable(document.querySelector("#table1"));
 t = new convertSpanTable(document.querySelector("#table3"));
 
 Object.prototype.getSpanSteve = function () { //not used
     return [this.getAttribute("rowspan"), this.getAttribute("colspan")]
 }
+*/
