@@ -1,4 +1,4 @@
-class myTable {
+class myTable { //test in ¤¤¤å?
     fromUrl(url) {
         let json_string = UrlFetchApp.fetch(url).getContentText();
         let json = JSON.parse(json_string);
