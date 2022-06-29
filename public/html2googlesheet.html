@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <style>
+        th, td {
+            border: 1px solid #333;
+        }
+
+        .table_block {
+            display: flex;
+        }
+    </style>
+    <h1>Hello World</h1>
+    <p style="white-space: pre-line">
+        The page demos how to convert HTMl table with colspan / rowspan to regular HTMl table.
+        The table in the left is complicated table.
+        The table in the right is simple HTML table which allow us to get every table cell data.
+    </p>
+
+    <div class="table_block" id="div0">
+        <table id="table0">
+            <thead>
+                <tr><th>H0</th><th>H1</th><th>H2</th><th>H3</th><th>H4</th><th>H5</th><th>H7</th></tr>
+            </thead>
+            <tbody>
+                <tr><td rowspan="2">a0</td><td>a1</td><td>a2</td><td>a3</td><td>a4</td><td>a5</td></tr>
+                <tr><td rowspan="2" colspan="1">b0</td><td>b1</td><td>b2</td><td>b3</td><td>b4</td><td>b5</td></tr>
+                <tr><td rowspan="2">c0</td><td colspan="2">c1</td><td>c2</td><td>c3</td><td>c4</td><td>c5</td></tr>
+                <tr><td colspan="2">d0</td><td>d1</td><td>d2</td><td>d3</td><td>d4</td><td>d5</td></tr>
+            </tbody>
+        </table>
+        <div> the new table =></div>
+    </div>
+    <div class="table_block" id="div1">
+        <table id="table2">
+            <thead>
+                <tr><th>H0</th><th>H1</th><th>H2</th><th>H3</th><th>H4</th><th>H5</th><th>H7</th></tr>
+            </thead>
+            <tbody>
+                <tr><td rowspan="2">a0</td><td>a1</td><td>a2</td><td>a3</td><td>a4</td><td>a5</td></tr>
+                <tr><td>b0</td><td rowspan="3" colspan="3">b1</td><td>b2</td><td>b3</td><td>b4</td><td>b5</td></tr>
+                <tr><td>c0</td><td>c1</td><td>c2</td><td>c3</td><td>c4</td><td>c5</td></tr>
+                <tr><td>d0</td><td>d1</td><td>d2</td><td>d3</td><td>d4</td><td>d5</td></tr>
+            </tbody>
+        </table>
+        <div> the new table =></div>
+    </div>
+    <script>
+        let table0 = document.querySelector("#table0")
+        let table1 = table0.cloneNode(true);
+        table1.id = "table1"
+        document.querySelector("#div0").append(table1);
+        table0 = document.querySelector("#table2")
+        table1 = table0.cloneNode(true);
+        table1.id = "table3"
+        document.querySelector("#div1").append(table1);
+    </script>
+    <script1 type="module" src="javascripts/convertSpanTable.js"></script1>
+    <script1 src="javascripts/myTable.js"></script1>
+    <script type="module"   src="javascripts/runScript.js"></script>
+</body>
+</html>

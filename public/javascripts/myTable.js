@@ -1,4 +1,4 @@
-class myTable { //test in 中文?
+export class myTable { //test in 中文?
     fromUrl(url) {
         let json_string = UrlFetchApp.fetch(url).getContentText();
         let json = JSON.parse(json_string);

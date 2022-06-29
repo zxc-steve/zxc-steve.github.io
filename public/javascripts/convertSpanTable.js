@@ -1,5 +1,5 @@
-console.log("hello !");
-class convertSpanTable {
+//console.log("hello !");
+export class convertSpanTable {
     // in-place convert HTMl table with colspan/rowspan to regular table
 
     constructor(t) {
