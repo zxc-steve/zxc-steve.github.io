@@ -10,7 +10,7 @@ async function func1() {
     let res = await fetch(url, {
         //headers: { 'Content-Type': 'text/plain' },
         //redirect: 'follow',
-        //mode: 'no-cors' // 'cors' by default, this will cause problem in google sheet API
+        mode: 'no-cors' // 'cors' by default, this will cause problem in google sheet API
     })
     //info.innerText = await res.text();
     info.innerText = JSON.stringify(await res.json(), null, 2);
